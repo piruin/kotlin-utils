@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 
-fun <T : View> T.onClicked(listener: (T) -> Unit) = setOnClickListener { listener(this) }
+fun <T : View> T.onClick(listener: (T) -> Unit) = setOnClickListener { listener(this) }
 
 fun <T : View> T.onLongClick(listener: (T) -> Boolean) = setOnLongClickListener { listener(this) }
 
@@ -47,5 +47,5 @@ private fun View.updateVisibility(visibility: Int) {
     }
 }
 
-val View.inflater: LayoutInflater
+val View.layoutInflater: LayoutInflater
     get() = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
