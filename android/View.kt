@@ -4,6 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 
+fun <T : View> T.onClicked(listener: (T) -> Unit) = setOnClickListener { listener(this) }
+
+fun <T : View> T.onLongClick(listener: (T) -> Boolean) = setOnLongClickListener { listener(this) }
+
 fun View.requestScroll(focus: Boolean = true) {
     if (focus) requestFocus()
     parent.requestChildFocus(this, this)
