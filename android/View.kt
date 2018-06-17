@@ -1,7 +1,8 @@
-import android.content.Context
+import android.support.annotation.LayoutRes
 import android.support.design.widget.TextInputLayout
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 
 fun <T : View> T.onClick(listener: (T) -> Unit) = setOnClickListener { listener(this) }
@@ -9,7 +10,7 @@ fun <T : View> T.onClick(listener: (T) -> Unit) = setOnClickListener { listener(
 fun <T : View> T.onLongClick(listener: (T) -> Boolean) = setOnLongClickListener { listener(this) }
 
 fun View.requestScroll(focus: Boolean = true) {
-    if (focus) requestFocus()
+    if (focus) requestFocus()`
     parent.requestChildFocus(this, this)
 }
 
@@ -48,4 +49,7 @@ private fun View.updateVisibility(visibility: Int) {
 }
 
 val View.layoutInflater: LayoutInflater
-    get() = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    get() = LayoutInflater.from(this.context)
+
+fun ViewGroup.inflate(@LayoutRes resource: Int, attach: Boolean = false) =
+        LayoutInflater.from(this.context).inflate(resource, this, attach)
