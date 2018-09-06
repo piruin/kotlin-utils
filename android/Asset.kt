@@ -5,6 +5,6 @@ import java.io.InputStreamReader
 
 @Throws(IOException::class)
 fun Context.assetAsString(filename: String): String {
-    val reader = BufferedReader(InputStreamReader(getAssets().open(filename)));
+    val reader = BufferedReader(InputStreamReader(getAssets().open(filename)))
     return reader.readText()
 }
