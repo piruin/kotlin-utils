@@ -9,6 +9,13 @@ fun TextView.getDouble(default: Double? = null): Double? {
   return text.toDouble()
 }
 
+fun View.error(message: String?) {
+    if (textInputLayout != null)
+        textInputLayout?.error = message
+    else if (this is TextView)
+        error = message
+}
+
 @Deprecated("Consider replace with drawableStart to better support right-to-left Layout", ReplaceWith("drawableStart"), DeprecationLevel.WARNING)
 var TextView.drawableLeft: Drawable?
   get() = compoundDrawables[0]
