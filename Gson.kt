@@ -23,13 +23,19 @@
  *
  */
 
-import android.content.Context
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 
-@Throws(IOException::class)
-fun Context.assetAsString(filename: String): String {
-    val reader = BufferedReader(InputStreamReader(getAssets().open(filename)))
-    return reader.readText()
+fun Any.toJson(gson: Gson = defaultGson)
+        = gson.toJson(this)
+
+inline fun <reified T> String.parseTo(gson: Gson = defaultGson): T
+        = gson.fromJson(this, object : TypeToken<T>() {}.type)
+
+inline fun <reified T> GsonBuilder.adapterFor(adapter: Any): GsonBuilder {
+    return registerTypeAdapter(object : TypeToken<T>() {}.type, adapter)
 }
+
+//Build your application gson as you want
+val defaultGson = GsonBuilder().create()
